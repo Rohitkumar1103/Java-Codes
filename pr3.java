@@ -1,42 +1,39 @@
-import java.util.Scanner;
+// Define the Apple class
+class Apple {
+    // Method specific to Apple class
+    void show() {
+        System.out.println("This is from Apple class.");
+    }
+}
 
+// Define the Banana class which inherits from Apple
+class Banana extends Apple {
+    // Method specific to Banana class
+    void show() {
+        System.out.println("This is from Banana class.");
+    }
+}
 
+// Define the Cherry class which inherits from Apple
+class Cherry extends Apple {
+    // Method specific to Cherry class
+    void show() {
+        System.out.println("This is from Cherry class.");
+    }
+}
+
+// Main class to demonstrate dynamic method dispatch
 public class pr3 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // Creating objects of each class
+        Apple apple = new Apple();
+        Banana banana = new Banana();
+        Cherry cherry = new Cherry();
 
-        System.out.print("Enter the number of students: ");
-        int n = scanner.nextInt();
-
-        Student[] students = new Student[n];
-
-        for (int i = 0; i < n; i++) {
-            System.out.println("Enter details for student " + (i + 1) + ":");
-            System.out.print("Roll No: ");
-            int rollNo = scanner.nextInt();
-            scanner.nextLine(); // Consume newline character
-            System.out.print("Name: ");
-            String name = scanner.nextLine();
-            System.out.print("CGPA: ");
-            double cgpa = scanner.nextDouble();
-
-            students[i] = new Student(rollNo, name, cgpa);
-        }
-
-        System.out.println("\nStudent Details:");
-        for (Student student : students) {
-            student.displayDetails();
-            System.out.println();
-        }
-
-        Student studentWithLowestCGPA = students[0];
-        for (int i = 1; i < n; i++) {
-            if (students[i].cgpa < studentWithLowestCGPA.cgpa) {
-                studentWithLowestCGPA = students[i];
-            }
-        }
-
-        System.out.println("Student with lowest CGPA:");
-        studentWithLowestCGPA.displayDetails();
+        // Using dynamic method dispatch to call show() method
+        // It will call the overridden method based on the object type
+        apple.show();
+        banana.show();
+        cherry.show();
     }
 }
