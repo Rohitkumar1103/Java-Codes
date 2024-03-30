@@ -1,21 +1,61 @@
 import java.util.Scanner;
 
+class Shape {
+    Shape() {}
+
+    double calculateCost() {
+        return 0.0;
+    }
+}
+
+class TwoDimensional extends Shape {
+    double length;
+    double width;
+
+    TwoDimensional(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+
+    @Override
+    double calculateCost() {
+        return length * width * 40;
+    }
+}
+
+class ThreeDimensional extends TwoDimensional {
+    double height;
+
+    ThreeDimensional(double length, double width, double height) {
+        super(length, width);
+        this.height = height;
+    }
+
+    @Override
+    double calculateCost() {
+        return super.calculateCost() + length * width * height * 60;
+    }
+}
+
 public class pr1 {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the length of the box: ");
-        double length = input.nextDouble();
+        System.out.println("Enter dimensions for 2D shape (length and width):");
+        double length2D = scanner.nextDouble();
+        double width2D = scanner.nextDouble();
 
-        System.out.print("Enter the width of the box: ");
-        double width = input.nextDouble();
+        System.out.println("Enter dimensions for 3D shape (length, width, and height):");
+        double length3D = scanner.nextDouble();
+        double width3D = scanner.nextDouble();
+        double height3D = scanner.nextDouble();
 
-        System.out.print("Enter the height of the box: ");
-        double height = input.nextDouble();
+        TwoDimensional shape2D = new TwoDimensional(length2D, width2D);
+        ThreeDimensional shape3D = new ThreeDimensional(length3D, width3D, height3D);
 
-        pr1helper pr1helper = new pr1helper(length, width, height);
-        double volume = pr1helper.volume();
+        System.out.println("Cost of 2D shape: Rs " + shape2D.calculateCost());
+        System.out.println("Cost of 3D shape: Rs " + shape3D.calculateCost());
 
-        System.out.println("The volume of the box is: " + volume);
+        scanner.close();
     }
 }
