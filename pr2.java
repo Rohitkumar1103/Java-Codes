@@ -1,28 +1,57 @@
-interface Motor {
-    int capacity = 40;
+import java.util.Scanner;
 
-    void run();
+class Plate {
+    double length;
+    double width;
 
-    void consume();
+    Plate(double length, double width) {
+        this.length = length;
+        this.width = width;
+        System.out.println("Plate created with dimensions: " + length + " x " + width);
+    }
 }
 
-class WashingMachine implements Motor {
-    public void run() {
-        System.out.println("Washing machine is running.");
-    }
+class Box extends Plate {
+    double height;
 
-    public void consume() {
-        System.out.println("Washing machine is consuming electricity.");
+    Box(double length, double width, double height) {
+        super(length, width);
+        this.height = height;
+        System.out.println("Box created with dimensions: " + length + " x " + width + " x " + height);
+    }
+}
+
+class WoodBox extends Box {
+    double thickness;
+
+    WoodBox(double length, double width, double height, double thickness) {
+        super(length, width, height);
+        this.thickness = thickness;
+        System.out.println("WoodBox created with dimensions: " + length + " x " + width + " x " + height + " and thickness: " + thickness);
     }
 }
 
 public class pr2 {
     public static void main(String[] args) {
-        WashingMachine wm = new WashingMachine();
+        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Capacity of the washing machine: " + Motor.capacity);
+        System.out.println("Enter dimensions for Plate (length and width):");
+        double lengthPlate = scanner.nextDouble();
+        double widthPlate = scanner.nextDouble();
 
-        wm.run();
-        wm.consume();
+        System.out.println("Enter dimensions for Box (length, width, and height):");
+        double lengthBox = scanner.nextDouble();
+        double widthBox = scanner.nextDouble();
+        double heightBox = scanner.nextDouble();
+
+        System.out.println("Enter dimensions for WoodBox (length, width, height, and thickness):");
+        double lengthWoodBox = scanner.nextDouble();
+        double widthWoodBox = scanner.nextDouble();
+        double heightWoodBox = scanner.nextDouble();
+        double thicknessWoodBox = scanner.nextDouble();
+
+        WoodBox woodBox = new WoodBox(lengthWoodBox, widthWoodBox, heightWoodBox, thicknessWoodBox);
+
+        scanner.close();
     }
 }
