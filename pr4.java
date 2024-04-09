@@ -1,70 +1,59 @@
 import java.util.Scanner;
 
-// Define the Account class
-class Account {
-    int acc_no;
-    double balance;
+interface Employee {
+    void getDetails();
+}
 
-    // Method to take input from the user
-    void input() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter account number:");
-        acc_no = scanner.nextInt();
-        System.out.println("Enter balance:");
-        balance = scanner.nextDouble();
+interface Manager extends Employee {
+    void getDeptDetails();
+}
+
+class Head implements Manager {
+    private int empId;
+    private String empName;
+    private int deptId;
+    private String deptName;
+    private Scanner scanner;
+
+    public Head() {
+        this.scanner = new Scanner(System.in);
     }
 
-    // Method to display account details
-    void disp() {
-        System.out.println("Account Number: " + acc_no);
-        System.out.println("Balance: " + balance);
+    public void getDetails() {
+        System.out.print("Enter employee id: ");
+        empId = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter employee name: ");
+        empName = scanner.nextLine();
+    }
+
+    public void getDeptDetails() {
+        System.out.print("Enter department id: ");
+        deptId = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Enter department name: ");
+        deptName = scanner.nextLine();
+    }
+
+    public void displayDetails() {
+        System.out.println("Employee id - " + empId);
+        System.out.println("Employee name - " + empName);
+        System.out.println("Department id - " + deptId);
+        System.out.println("Department name - " + deptName);
+    }
+
+    // Close the Scanner when it's no longer needed
+    public void closeScanner() {
+        scanner.close();
     }
 }
 
-// Define the Person class inheriting from Account
-class Person extends Account {
-    String name;
-    long aadhar_no;
-
-    // Method to take input from the user including additional details
-    @Override
-    void input() {
-        super.input(); // Call input method of Account class to input account details
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter name:");
-        name = scanner.nextLine();
-        System.out.println("Enter Aadhar number:");
-        aadhar_no = scanner.nextLong();
-    }
-
-    // Method to display person's details overriding the disp() method of Account
-    // class
-    @Override
-    void disp() {
-        super.disp(); // Call disp method of Account class to display account details
-        System.out.println("Name: " + name);
-        System.out.println("Aadhar Number: " + aadhar_no);
-    }
-}
-
-// Main class to demonstrate the program
 public class pr4 {
     public static void main(String[] args) {
-        Person[] persons = new Person[3]; // Create an array to hold three Person objects
-
-        // Input details of three persons
-        System.out.println("Enter details of three persons:");
-        for (int i = 0; i < 3; i++) {
-            persons[i] = new Person();
-            persons[i].input();
-        }
-
-        // Display details of three persons
-        System.out.println("\nDetails of three persons:");
-        for (int i = 0; i < 3; i++) {
-            System.out.println("Person " + (i + 1) + ":");
-            persons[i].disp();
-            System.out.println();
-        }
+        Head head = new Head();
+        head.getDetails();
+        head.getDeptDetails();
+        head.displayDetails();
+        head.closeScanner();
     }
 }
