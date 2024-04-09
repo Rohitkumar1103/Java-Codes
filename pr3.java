@@ -1,39 +1,54 @@
-// Define the Apple class
-class Apple {
-    // Method specific to Apple class
-    void show() {
-        System.out.println("This is from Apple class.");
+import java.util.Scanner;
+
+interface Employee {
+    double earnings(double basic);
+
+    double deductions(double basic);
+
+    double bonus(double basic);
+}
+
+class Manager implements Employee {
+    public double earnings(double basic) {
+        double da = 0.8 * basic;
+        double hra = 0.15 * basic;
+        return basic + da + hra;
+    }
+
+    public double deductions(double basic) {
+        return 0.12 * basic;
+    }
+
+    public double bonus(double basic) {
+        return 0.0;
     }
 }
 
-// Define the Banana class which inherits from Apple
-class Banana extends Apple {
-    // Method specific to Banana class
-    void show() {
-        System.out.println("This is from Banana class.");
+class Substaff extends Manager {
+    public double bonus(double basic) {
+        return 0.5 * basic;
     }
 }
 
-// Define the Cherry class which inherits from Apple
-class Cherry extends Apple {
-    // Method specific to Cherry class
-    void show() {
-        System.out.println("This is from Cherry class.");
-    }
-}
-
-// Main class to demonstrate dynamic method dispatch
 public class pr3 {
     public static void main(String[] args) {
-        // Creating objects of each class
-        Apple apple = new Apple();
-        Banana banana = new Banana();
-        Cherry cherry = new Cherry();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter basic salary amount: ");
+        double basicSalary = scanner.nextDouble();
 
-        // Using dynamic method dispatch to call show() method
-        // It will call the overridden method based on the object type
-        apple.show();
-        banana.show();
-        cherry.show();
+        Substaff substaff = new Substaff();
+
+        double earnings = substaff.earnings(basicSalary);
+        double deductions = substaff.deductions(basicSalary);
+        double bonus = substaff.bonus(basicSalary);
+
+        System.out.println("Earnings: " + earnings);
+        System.out.println("Deductions: " + deductions);
+        System.out.println("Bonus: " + bonus);
+
+        double totalSalary = earnings - deductions + bonus;
+        System.out.println("Total Salary: " + totalSalary);
+
+        scanner.close();
     }
 }
