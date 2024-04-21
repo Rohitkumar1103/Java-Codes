@@ -1,28 +1,47 @@
-interface Motor {
-    int capacity = 40;
-
-    void run();
-
-    void consume();
+class SharedPrinter {
+    synchronized void print(String message) {
+        for (int i = 0; i < 1; i++) {
+            System.out.println(Thread.currentThread().getName() + ": " + message);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
 
-class WashingMachine implements Motor {
-    public void run() {
-        System.out.println("Washing machine is running.");
+class PrinterThread extends Thread {
+    private SharedPrinter sharedPrinter;
+    private String[] messages;
+
+    public PrinterThread(SharedPrinter sharedPrinter, String[] messages) {
+        this.sharedPrinter = sharedPrinter;
+        this.messages = messages;
     }
 
-    public void consume() {
-        System.out.println("Washing machine is consuming electricity.");
+    @Override
+    public void run() {
+        for (String message : messages) {
+            sharedPrinter.print(message);
+        }
     }
 }
 
 public class pr2 {
     public static void main(String[] args) {
-        WashingMachine wm = new WashingMachine();
+        SharedPrinter sharedPrinter = new SharedPrinter();
 
-        System.out.println("Capacity of the washing machine: " + Motor.capacity);
+        String[] messages1 = { "I", "Love", "Java", "very","Much " };
+        String[] messages2 = { "I ", "Love", "Java", "Very", "Much " };
 
-        wm.run();
-        wm.consume();
+        PrinterThread thread1 = new PrinterThread(sharedPrinter, messages1);
+        PrinterThread thread2 = new PrinterThread(sharedPrinter, messages2);
+
+        thread1.setName("Thread 1");
+        thread2.setName("Thread 2");
+
+        thread1.start();
+        thread2.start();
     }
 }
