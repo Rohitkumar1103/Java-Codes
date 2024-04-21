@@ -1,32 +1,39 @@
-import java.util.Scanner;
+class CounterThread extends Thread {
+    private int lowerRange;
+    private int upperRange;
 
-abstract class Student {
-    protected int rollNo;
-    protected int regNo;
-
-    public void getInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter Roll No: ");
-        rollNo = scanner.nextInt();
-        System.out.print("Enter Reg No: ");
-        regNo = scanner.nextInt();
+    public CounterThread(String name, int lowerRange, int upperRange) {
+        super(name);
+        this.lowerRange = lowerRange;
+        this.upperRange = upperRange;
     }
 
-    public abstract void course();
-}
-
-class Kiitian extends Student {
-    public void course() {
-        System.out.println("Course: B.Tech in Computer Science");
+    @Override
+    public void run() {
+        System.out.println("Thread - " + getName());
+        for (int i = lowerRange; i <= upperRange; i++) {
+            System.out.print(+i + " ");
+            try {
+                Thread.sleep(5); // Sleep for 5 milliseconds
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 
 public class pr1 {
     public static void main(String[] args) {
-        Kiitian student = new Kiitian();
-        student.getInput();
-        student.course(); 
-        System.out.println("Roll No: " + student.rollNo);
-        System.out.println("Reg No: " + student.regNo);
+        if (args.length != 3) {
+            System.out.println("Usage: java pr1 <ThreadName> <LowerRange> <UpperRange>");
+            return;
+        }
+
+        String threadName = args[0];
+        int lowerRange = Integer.parseInt(args[1]);
+        int upperRange = Integer.parseInt(args[2]);
+
+        Thread counterThread = new CounterThread(threadName, lowerRange, upperRange);
+        counterThread.start();
     }
 }
