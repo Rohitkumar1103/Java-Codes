@@ -5,10 +5,8 @@ public class reverse{
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter the last number: ");
     int n = sc.nextInt();
-    while (n >0){
-      int lastDigit = n%10;
-      System.out.print(lastDigit);
-      n = n/10;    
+    for (int i=n;i>0;i--){
+      System.out.print(i+ " ");
     }
-  }
-}
+
+}}
