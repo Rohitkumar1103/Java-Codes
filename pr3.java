@@ -1,54 +1,14 @@
-import java.util.Scanner;
+import java.util.*;
 
-interface Employee {
-    double earnings(double basic);
-
-    double deductions(double basic);
-
-    double bonus(double basic);
-}
-
-class Manager implements Employee {
-    public double earnings(double basic) {
-        double da = 0.8 * basic;
-        double hra = 0.15 * basic;
-        return basic + da + hra;
+public class pr3{
+  public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter the last number: ");
+    int range = sc.nextInt();
+    int count = 1;
+    while (count <= range){
+      System.out.print(count+ " ");
+      count++;
     }
-
-    public double deductions(double basic) {
-        return 0.12 * basic;
-    }
-
-    public double bonus(double basic) {
-        return 0.0;
-    }
-}
-
-class Substaff extends Manager {
-    public double bonus(double basic) {
-        return 0.5 * basic;
-    }
-}
-
-public class pr3 {
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter basic salary amount: ");
-        double basicSalary = scanner.nextDouble();
-
-        Substaff substaff = new Substaff();
-
-        double earnings = substaff.earnings(basicSalary);
-        double deductions = substaff.deductions(basicSalary);
-        double bonus = substaff.bonus(basicSalary);
-
-        System.out.println("Earnings: " + earnings);
-        System.out.println("Deductions: " + deductions);
-        System.out.println("Bonus: " + bonus);
-
-        double totalSalary = earnings - deductions + bonus;
-        System.out.println("Total Salary: " + totalSalary);
-
-        scanner.close();
-    }
+  }
 }
