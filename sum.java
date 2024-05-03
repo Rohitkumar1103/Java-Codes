@@ -1,15 +1,15 @@
 import java.util.*;
 
 public class sum{
+  public static int calculateSum(int num1,int num2){
+    int sum = num1 + num2;
+    return sum;
+  }
   public static void main(String[] args){
     Scanner sc = new Scanner(System.in);
-    System.out.println("Enter the last number: ");
-    int n = sc.nextInt();
-    int sum = 0;
-    int i = 1;
-    while (i <= n){
-      sum = sum+i;
-      i++;
-    }
-    System.out.print("Sum of Natural Number upto"+ n +" : " +sum);
-}}
+    int a = sc.nextInt();
+    int b = sc.nextInt();
+    int sum = calculateSum(a,b);
+    System.out.println("Sum is: "+sum );
+  }
+}
