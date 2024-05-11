@@ -1,20 +1,24 @@
-import java.util.*;
-
 public class pr1{
+  public static void printSubArray(int numbers[]){
+    int ts= 0;
+
+    for(int i=0;i<numbers.length;i++){
+      int start =i;
+      for(int j=i;j<numbers.length;j++){
+        int end = j;
+        for(int k=start;k<=end;k++){
+          System.out.print(numbers[k]+ " ");
+        }
+        ts++;
+        System.out.println();
+      }
+      System.out.println();
+    }
+    System.out.print("Total SubArray = "+ ts);
+  }
+
   public static void main(String[] args){
-    int marks[] = new int[100];
-    Scanner sc = new Scanner(System.in); 
-    marks[0] = sc.nextInt();
-    marks[1] = sc.nextInt();
-    marks[2] = sc.nextInt();
-
-    System.out.println("Phy: " +marks[0]);
-    System.out.println("Chem: " +marks[1]);
-    System.out.println("Math: " +marks[2]);
-
-    marks[2] = 78;
-
-    System.out.println("Math: " +marks[2]);
-    System.out.println("Length of array= " +marks.length);
+    int numbers[] = {2, 4, 6, 8, 10};
+    printSubArray(numbers);
   }
 }
