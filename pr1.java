@@ -2,19 +2,19 @@ import java.util.*;
 
 public class pr1{
   public static void main(String[] args){
-    int marks[] = new int[100];
-    Scanner sc = new Scanner(System.in); 
-    marks[0] = sc.nextInt();
-    marks[1] = sc.nextInt();
-    marks[2] = sc.nextInt();
-
-    System.out.println("Phy: " +marks[0]);
-    System.out.println("Chem: " +marks[1]);
-    System.out.println("Math: " +marks[2]);
-
-    marks[2] = 78;
-
-    System.out.println("Math: " +marks[2]);
-    System.out.println("Length of array= " +marks.length);
+    int n=3, m=3;
+    int matrix [][] = new int[n][m];
+    Scanner sc = new Scanner(System.in);
+    for(int i=0; i<n; i++){
+      for(int j=0; j<m; j++){
+        matrix[i][j] = sc.nextInt();
+      }
+    }
+    for(int i=0; i<n; i++){
+      for(int j=0; j<m; j++){
+        System.out.print(matrix[i][j] +" ");
+      }
+      System.out.println();
+    }
   }
 }
