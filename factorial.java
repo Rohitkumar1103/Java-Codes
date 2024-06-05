@@ -1,15 +1,14 @@
-import java.util.*;
-
 public class factorial{
-  public static int fact(int a){
-    int facto = 1;
-    for(int i=1; i <=a; i++){
-      facto = facto*i;
+  public static int fact(int n){
+    if(n==0){
+      return 1;
     }
-    return facto;
-}
+    // int fnm1 = fact(n-1);
+    int fn = n*fact(n-1);
+    return fn;
+  }
   public static void main(String[] args){
-    int facto = fact(4);
-    System.out.println(facto);
+    int n=5;
+    System.out.println( fact(n));
   }
 }
