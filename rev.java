@@ -1,24 +1,24 @@
 public class rev{
-  public static void reverse(int arr[]){
-    int start=0;
-    int end = arr.length - 1;
-
-    while(start<end){
-      //swap
-      int temp = arr[end];
-      arr[end] = arr[start];
-      arr[start] = temp;
-
-      start++;
-      end--;
+  public static void changeArr(int arr[], int i, int val){
+    //base case
+    if(i == arr.length){
+      printArr(arr);
+      return;
     }
+    //recursion
+    arr[i] = val;
+    changeArr(arr, i+1, val+1);
+    arr[i] = arr[i] -2;
   }
-  public static void main(String[] args){
-    int arr[] = {2, 54, 23, 98, 21 , 11, 40};
-    reverse(arr);
-    for(int i=0;i<arr.length;i++){
+  public static void printArr(int arr[]){
+    for (int i=0; i<arr.length; i++){
       System.out.print(arr[i]+ " ");
     }
     System.out.println();
+  }
+  public static void main(String[] args){
+    int arr[] = new int[5];
+    changeArr(arr, 0, 1);
+    printArr(arr);
   }
 }
